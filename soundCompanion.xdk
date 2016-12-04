@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/sample-iot-companion-local-temperature/sample.zip",
       "projectGuid": "aa2e511f-f0d0-4030-a413-aa68e6498df1",
-      "lastModifiedDate": 1480809561812,
+      "lastModifiedDate": 1480881294185,
       "creationDate": 1480809271255
     },
     "sourceDirectory": "www",

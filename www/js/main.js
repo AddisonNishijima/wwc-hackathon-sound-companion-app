@@ -7,9 +7,6 @@
 //elongate time frame
 //log = cumulative sound message
 
-
-var volts_to_decibel = 26;
-
 var chart_data = [];
 /*Creation of the d3 ScatterPlot*/
 var splot_dataset = [];
@@ -98,7 +95,7 @@ function plot() {
     //Draw Line Graph && Draw circles
     chart_svg.selectAll("circle").data(splot_dataset).enter().append("svg").attr("id", "chart_graph").append("circle")
         .attr("cx", function (d, i) {
-            return x1(d[0])*.5;
+            return x1(d[0])*0.5;
         }).attr("cy", function (d) {
             return y1(d[1]);
         }).attr("r", 3).attr("class", "dot")
@@ -156,16 +153,13 @@ function validateIP() {
             });
 
             socket.on("message", function (message) {
-                var decibel = message;
-                if(message === "Daily Limit Reached"){
-                    $("#feedback_log").html("<h1 id='limit_warning'>WARNING: Daily Limit Reached</h1>");
-                } else {
-                   chart_data.push(message);
+                chart_data.push(message);
                 plot(); 
-                }
                 
-                //Update log
+            });
                 
+            socket.on("alert", function (message) {
+                $("#feedback_log").append("<h4 class='alert'>Warning:" + message + "</h3>");             
             });
         } catch (e) {
             navigator.notification.alert(
