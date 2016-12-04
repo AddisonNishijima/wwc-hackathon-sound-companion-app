@@ -40,6 +40,7 @@ Future Implementations
 ------------------------------
 * Strava API
 * Acessible, friendly UI
+* More informative messages - include timestamp etc.
 
 Contributors
 ------------------------------
