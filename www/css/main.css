@@ -3,6 +3,10 @@
     color: black;
 }
 
+#afui.android .button {
+    color: white;
+}
+
 .center{
     text-align: center;
 }
@@ -26,7 +30,7 @@ svg {
 }
  
  .tick {
-    fill: #c0392b;
+    fill: blue;
  }
 
 .dot {

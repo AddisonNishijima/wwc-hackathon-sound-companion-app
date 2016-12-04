@@ -48,7 +48,7 @@ chart_svg.attr("transform", "translate(25," + margin.top + ")");
 
 var x1 = d3.scale.linear().domain([0, 5000]).range([0, 100000]);
 
-var y1 = d3.scale.linear().domain([0, 150]).range([0.5 * height, 0]);
+var y1 = d3.scale.linear().domain([0, 120]).range([0.5 * height, 0]);
 
 //Add X Axis grid lines
 chart_svg.selectAll("line.y1")
@@ -62,7 +62,7 @@ chart_svg.selectAll("line.y1")
     .style("stroke", "rgba(8, 16, 115, 0.2)");
 
 //This is for the Scatterplot X axis label
-chart_svg.append("text").attr("fill", "red").attr("text-anchor", "end").attr("x", 0.5 * window.innerWidth).attr("y", 0.55 * height).text("");
+chart_svg.append("text").attr("fill", "blue").attr("text-anchor", "end").attr("x", 0.5 * window.innerWidth).attr("y", 0.55 * height).text("");
 
 var x1Axis = d3.svg.axis().scale(x1).orient("top").tickPadding(0).ticks(5000).tickFormat("");
 var y1Axis = d3.svg.axis().scale(y1).orient("left").tickPadding(0);
@@ -72,7 +72,7 @@ chart_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," +
 chart_svg.append("g").attr("class", "y axis").call(y1Axis);
 
 
-chart_purge_time = Math.round(((window.innerWidth * 40) / 569) - 2);
+chart_purge_time = Math.round(((window.innerWidth * 40) / 420) - 2);
 
 function purgeData() {
     'use strict';
@@ -108,7 +108,7 @@ function plot() {
             } else if ((d[1] > 45) && (d[1] < 101)) {
                 return "green";
             } else {
-                return "white";
+                return "black";
             }
         }).attr("stroke", "black").attr("stroke-width", 1);
     //Handle purging data
@@ -145,7 +145,7 @@ function validateIP() {
                 navigator.notification.alert(
                     "Great Job!",  // message
                     "",                     // callback
-                    'You are Connected!',            // title
+                    'Connected!',            // title
                     'Ok'                  // buttonName
                 );
 
@@ -156,11 +156,16 @@ function validateIP() {
             });
 
             socket.on("message", function (message) {
-                var decibel = message * volts_to_decibel;
-                chart_data.push(decibel);
-                plot();
+                var decibel = message;
+                if(message === "Daily Limit Reached"){
+                    $("#feedback_log").html("<h1 id='limit_warning'>WARNING: Daily Limit Reached</h1>");
+                } else {
+                   chart_data.push(message);
+                plot(); 
+                }
+                
                 //Update log
-                //$("#feedback_log").append(decibel + " ");
+                
             });
         } catch (e) {
             navigator.notification.alert(
