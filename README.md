@@ -1,18 +1,18 @@
-Smart Sound Monitor IoT Companion App
+E.N.D.Y IoT Companion App
 ===================================
 
 See [LICENSE.md](LICENSE.md) for license terms and conditions.
 
 App Overview
 ------------
-The Smart Sound Monitor Companion App is a simple app that visualizes
-data received from the Smart Sound Monitor node.js/IoT project, which runs on the Intel Edison. The app graphs sound intensity on an ongoing basis and also prints warnings when dangerous sound levels are reached. 
+The E.N.D.Y Companion App is a simple app that visualizes
+data received from the E.N.D. node.js/IoT project, which runs on the Intel Edison. The app graphs sound intensity on an ongoing basis and also prints warnings when dangerous sound levels are reached. 
 
 Please see Smart Sound Monitor README for more information.
 
-Link to Smart Sound Monitor
+Link to E.N.D.Y
 --------------------------
-* [https://github.com/Heidi-/SmartSoundMonitor](https://github.com/Heidi-/SmartSoundMonitor)
+* [E.N.D.Y](https://github.com/Heidi-/SmartSoundMonitor)
 
 Instructions
 --------------------------
