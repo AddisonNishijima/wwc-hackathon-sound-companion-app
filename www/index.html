@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--HTML5 doctype-->
 <html>
 <head>
-    <title>Temperature Checker Companion App</title>
+    <title>Smart Sound Monitor Companion App</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
     <style type="text/css">
@@ -36,19 +36,19 @@
 
         <div id="content">
 
-            <div id="main" title="LocalTemperature" class="panel" data-footer="none">
+            <div id="main" title="Smart Sound Monitor" class="panel" data-footer="none">
                 <div class="center">
-                    <h1>How Hot is It?(°F)</h1>
-                    <div id="gauge"><span>Temp</span></div>
+                    <h1>How loud is your environment?(in decibels)</h1>
+<!--                    <div id="gauge"><span>Temp</span></div>-->
                     <div id="chart"></div>
                 </div>
                 <div>
                     <b>Log:</b><br>
-                    <div id="feedback_log" class="redtext"></div>
+                    <div id="feedback_log" class="blacktext"></div>
                 </div>
             </div>
 
-            <div class="panel" data-title="LocalTemp Companion" modal="true" selected="true">
+            <div class="panel" data-title="Smart Sound Monitor" modal="true" selected="true">
                 <p>Please provide an IP address & port to your SoundThing IoT project in your development platform.</p>
                 <em>Note:<em> This is needed for establishing a connection betweeen your Companion App and Node.js/IoT application.
                 <p>

@@ -3,6 +3,13 @@
 /* jshint strict: true, -W097, unused:false, undef:true */
 /*global window, document, d3, $, io, navigator, setTimeout */
 
+//take out temp stuff
+//elongate time frame
+//log = cumulative sound message
+
+
+var volts_to_decibel = 26;
+
 var chart_data = [];
 /*Creation of the d3 ScatterPlot*/
 var splot_dataset = [];
@@ -22,7 +29,7 @@ var isPurged = 0;
 var chart_purge_time = 0;
 
 //Set the height of the gauge
-document.getElementById("gauge").setAttribute("style", "height:" + 0.20 * window.innerHeight + "px");
+//document.getElementById("gauge").setAttribute("style", "height:" + 0.20 * window.innerHeight + "px");
 
 //Create a JSON style object for the margin
 var margin = {
@@ -41,7 +48,7 @@ chart_svg.attr("transform", "translate(25," + margin.top + ")");
 
 var x1 = d3.scale.linear().domain([0, 5000]).range([0, 100000]);
 
-var y1 = d3.scale.linear().domain([0, 200]).range([0.5 * height, 0]);
+var y1 = d3.scale.linear().domain([0, 150]).range([0.5 * height, 0]);
 
 //Add X Axis grid lines
 chart_svg.selectAll("line.y1")
@@ -55,9 +62,9 @@ chart_svg.selectAll("line.y1")
     .style("stroke", "rgba(8, 16, 115, 0.2)");
 
 //This is for the Scatterplot X axis label
-chart_svg.append("text").attr("fill", "red").attr("text-anchor", "end").attr("x", 0.5 * window.innerWidth).attr("y", 0.55 * height).text("Periods");
+chart_svg.append("text").attr("fill", "red").attr("text-anchor", "end").attr("x", 0.5 * window.innerWidth).attr("y", 0.55 * height).text("");
 
-var x1Axis = d3.svg.axis().scale(x1).orient("top").tickPadding(0).ticks(1000);
+var x1Axis = d3.svg.axis().scale(x1).orient("top").tickPadding(0).ticks(5000).tickFormat("");
 var y1Axis = d3.svg.axis().scale(y1).orient("left").tickPadding(0);
 
 chart_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y1.range()[0] + ")").call(x1Axis);
@@ -65,7 +72,7 @@ chart_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," +
 chart_svg.append("g").attr("class", "y axis").call(y1Axis);
 
 
-chart_purge_time = Math.round(((window.innerWidth * 40) / 969) - 2);
+chart_purge_time = Math.round(((window.innerWidth * 40) / 569) - 2);
 
 function purgeData() {
     'use strict';
@@ -91,14 +98,14 @@ function plot() {
     //Draw Line Graph && Draw circles
     chart_svg.selectAll("circle").data(splot_dataset).enter().append("svg").attr("id", "chart_graph").append("circle")
         .attr("cx", function (d, i) {
-            return x1(d[0]);
+            return x1(d[0])*.5;
         }).attr("cy", function (d) {
             return y1(d[1]);
         }).attr("r", 3).attr("class", "dot")
         .style("fill", function (d) {
-            if (d[1] > 100) {
+            if (d[1] > 80) {
                 return "red";
-            } else if ((d[1] > 59) && (d[1] < 101)) {
+            } else if ((d[1] > 45) && (d[1] < 101)) {
                 return "green";
             } else {
                 return "white";
@@ -149,10 +156,11 @@ function validateIP() {
             });
 
             socket.on("message", function (message) {
-                //chart_data.push(message);
-                //plot();
+                var decibel = message * volts_to_decibel;
+                chart_data.push(decibel);
+                plot();
                 //Update log
-                $("#feedback_log").append(message);
+                //$("#feedback_log").append(decibel + " ");
             });
         } catch (e) {
             navigator.notification.alert(
